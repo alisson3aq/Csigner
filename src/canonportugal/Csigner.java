@@ -83,9 +83,6 @@ public class Csigner {
         sourceFile = workingDir + args[0];
         useLTV = Boolean.parseBoolean(args[1]);
         
-        
-        
-        
         try {
             
             Security.addProvider(new POReIDProvider());
@@ -148,9 +145,8 @@ public class Csigner {
         ExternalSignature es = new PrivateKeySignature(pk, "SHA-256", POReIDConfig.POREID);
         ExternalDigest digest = new ProviderDigest(null);
         if (useLTV) {
-            MakeSignature.signDetached(appearance, digest, es, chain, crlList, ocsp, tsc, 0, CryptoStandard.CMS);
-
-            
+            //MakeSignature.signDetached(appearance, digest, es, chain, crlList, ocsp, tsc, 0, CryptoStandard.CMS);
+            MakeSignature.signDetached(appearance, digest, es, chain, null, ocsp, tsc, 0, CryptoStandard.CMS);
         } else {
             MakeSignature.signDetached(appearance, digest, es, chain, null, null, tsc, 0, CryptoStandard.CMS);
         }
@@ -209,9 +205,6 @@ public class Csigner {
                 JOptionPane.showMessageDialog(null, "PDF não encontrado.");
                 return false;
             }
-            
-            
-            
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
